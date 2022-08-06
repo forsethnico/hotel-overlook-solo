@@ -4,13 +4,71 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <title>Thrifty Traveler</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
+  <header class="header-container">
+    <h1 class="title">FossHotel Iceland</h1>
+    <button class="nav-button hidden" id="homeBtn">Go Home</button>
+    <button class="book-button hidden" id="bookBtn">Book</button>
+    <button class="profile-button hidden" id="profileBtn">Profile</button>
+    <button class="nav-button" id="login-btn">Log In</button>
+    <button class="nav-button hidden" id="logoutBtn">Log Out</button>
+  </header>
+  <section class="main-page">
+    <h2 class="welcome-message">Sleep inside a glacier!</h2>
+    <button class="book-now-btn">Book now!</button>
+    <img src="./images/glacier.jpeg" alt="glacier cave background">
+  </section>
+  <section class="login-page hidden"> 
+    <form class="login-form">
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" name="username"><br>
+      <label for="pwd">Password:</label><br>
+      <input type="password" id="pwd" name="pwd">
+    </form>
+    <p class="error-message" id="errorMessage"></p>
+    <button class="sign-on-button" id="login-btn" type="submit" value="Sign in">Sign In</button>
+  </section>
+  <section class="profile-page hidden">
+    <h2 class="welcome-message">Hello, user!</h2>
+    <h2>Total Expenses:</h2>
+    <section class="total-expenses"></section>
+    <h2>Your upcoming stays:</h2>
+      <section class="no-stays"></section>
+      <section class="search-results" id="upcomingStays"></section>
+    <h2>Your past stays:</h2>
+      <section class="no-stays"></section>
+      <section class="search-results" id="pastStays"></section>
+  </section>    
+  <section class="select-page hidden">
+    <form class="select-dates">
+      <label for="arrive">Choose Arrival Date</label>
+      <input type="date" id="arrivalDate" value="2021-01-01" min="2021-01-01" name="arrive" required>
+    </form>
+    <button class="sign-on-btn" id="checkAvailBtn">Check Availability</button>  
+  </section>
+  <section class="search-page hidden">
+    <section class="room-type">
+      <p class="your-dates"></p>
+      <button class="sign-on-button" id="changeDates">Change Dates</button>
+      <form class = "room-type-form" id="roomType">
+        <label for="roomType" class="room-type-form-label">Filter results by room type:</label>
+          <select name="roomType" class="room-type-form">
+          </select>
+      </form>
+    </section>
+    <section class="user-message"></section>
+    <section class="filtered-results"></section>
+  </section> 
+  <section class-"booking-page hidden">
+    <p class="error-message"></p>
+    <section class="room-to-book"></section>
+  </section> 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
