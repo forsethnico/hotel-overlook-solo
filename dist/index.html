@@ -6,33 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-  <title>Thrifty Traveler</title>
+ <link href="<link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono&display=swap" rel="stylesheet">
+ <title>FossHotel Iceland</title>
 </head>
 <body>
   <header class="header-container">
     <h1 class="title">FossHotel Iceland</h1>
-    <button class="nav-button hidden" id="homeBtn">Go Home</button>
-    <button class="book-button hidden" id="bookBtn">Book</button>
+    <button class="home-button hidden" id="homeBtn">Go Home</button>
     <button class="profile-button hidden" id="profileBtn">Profile</button>
-    <button class="nav-button" id="login-btn">Log In</button>
-    <button class="nav-button hidden" id="logoutBtn">Log Out</button>
+    <section class="login-form-section"> 
+      <form class="login-form">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="pwd">Password:</label><br>
+        <input type="password" id="pwd" name="pwd">
+      </form>
+      <button class="login-button" id="loginBtn" type="submit" value="Sign in">Log In</button>
+      <button class="logout-button hidden" id="logoutBtn">Log Out</button>
+      <p class="error-message" id="errorMessage"></p>
+    </section>
   </header>
   <section class="main-page">
     <h2 class="welcome-message">Sleep inside a glacier!</h2>
-    <button class="book-now-btn">Book now!</button>
-    <img src="./images/glacier.jpeg" alt="glacier cave background">
   </section>
-  <section class="login-page hidden"> 
-    <form class="login-form">
-      <label for="username">Username:</label><br>
-      <input type="text" id="username" name="username"><br>
-      <label for="pwd">Password:</label><br>
-      <input type="password" id="pwd" name="pwd">
-    </form>
-    <p class="error-message" id="errorMessage"></p>
-    <button class="sign-on-button" id="login-btn" type="submit" value="Sign in">Sign In</button>
-  </section>
+ 
   <section class="profile-page hidden">
     <h2 class="welcome-message">Hello, user!</h2>
     <h2>Total Expenses:</h2>
@@ -67,6 +66,7 @@
   <section class-"booking-page hidden">
     <p class="error-message"></p>
     <section class="room-to-book"></section>
+    <button class="book-button hidden" id="bookBtn">Book</button>
   </section> 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>

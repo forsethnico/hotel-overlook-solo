@@ -10,7 +10,7 @@ const fetchCustomer = (id) => {
     return fetch(`http://localhost:3001/api/v1/customers/${id}`)
     .then(handleLoginError)
     .then(response => loadUser(response))
-    .catch(error => console.log(`API error: ${error.message}`)
+    .catch(error => console.log(`API error: ${error.message}`))
 }
 
 const fetchCustomers = () => {
@@ -46,7 +46,6 @@ const bookRoom = (customer, dateSelected, roomNum) => {
         })
     })
     .then(handlePostError)
-    .then(() => //update dom to show confirmation view)
     .then(() => fetchHotelData())
     .catch(error => console.log(`API error: ${error.message}`))
 }
@@ -71,7 +70,6 @@ function handlePostError(response) {
 
 export { 
 getHotelData,
-fetchPhotos,
 fetchCustomer,
 fetchCustomers,
 bookRoom
