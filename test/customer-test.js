@@ -2,22 +2,14 @@ import chai from 'chai';
 const expect = chai.expect;
 import Booking from '../src/booking';
 import Customer from '../src/customer';
-//import Hotel from '../src/hotel';
-//import Room from '../src/room';
 import { customers, rooms, bookings } from './data-test.js'
 
 describe('Customer', () => {
     let customer1,
     customer2, 
-    room1,
-    room2,
-    room3,
     booking1,
     booking2,
-    booking3,
-    allBookings;
-   // allRooms,
-    //hotel;
+    booking3;
 
     beforeEach(() => {
         customer1 = new Customer(customers[0]);
@@ -25,12 +17,6 @@ describe('Customer', () => {
         booking1 = new Booking(bookings[0]);
         booking2 = new Booking(bookings[1]);
         booking3 = new Booking(bookings[2]);
-        // room1 = new Room(rooms[0]);
-        // room2 = new Room(rooms[1]);
-        // room3 = new Room(rooms[2]);
-        allBookings = [booking1, booking2, booking3];
-        //allRooms = [room1, room2, room3];
-        //hotel = new Hotel(allBookings, allRooms);
     })
 
     it('should be a function', () => {
@@ -69,9 +55,5 @@ describe('Customer', () => {
     it('should calculate total room expenses', () => {
         expect(customer1.getTotalExpenses(bookings, rooms)).to.equal(716.8);
     });
-
-    // it('should be able to add a booking', () => {
-    //     expect(customer1.bookings).to.deep.equal();
-    // });
 
 })
