@@ -15,33 +15,29 @@
   <header class="header-container">
     <h1 class="title">FossHotel Iceland</h1>
     <button class="home-button hidden" id="homeBtn">Go Home</button>
-    <button class="profile-button hidden" id="profileBtn">Profile</button>
+    <button class="profile-button" id="profileBtn">Profile</button>
     <section class="login-form-section"> 
       <form class="login-form">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="pwd">Password:</label><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <label for="pwd">Password:</label>
         <input type="password" id="pwd" name="pwd">
+        <button class="login-button" id="loginBtn" type="submit" value="Sign in">Log In</button>
+        <p class="error-message" id="errorMessage"></p>
       </form>
-      <button class="login-button" id="loginBtn" type="submit" value="Sign in">Log In</button>
       <button class="logout-button hidden" id="logoutBtn">Log Out</button>
       <p class="error-message" id="errorMessage"></p>
     </section>
   </header>
-  <section class="main-page">
+  <section class="main-page hidden">
     <h2 class="welcome-message">Sleep inside a glacier!</h2>
   </section>
- 
   <section class="profile-page hidden">
-    <h2 class="welcome-message">Hello, user!</h2>
+    <h2 class="welcome-message" id="userWelcome">Hello, user!</h2>
     <h2>Total Expenses:</h2>
     <section class="total-expenses"></section>
-    <h2>Your upcoming stays:</h2>
-      <section class="no-stays"></section>
-      <section class="search-results" id="upcomingStays"></section>
-    <h2>Your past stays:</h2>
-      <section class="no-stays"></section>
-      <section class="search-results" id="pastStays"></section>
+    <h2>Your stays:</h2>
+      <section class="stay-results"></section>
   </section>    
   <section class="select-page hidden">
     <form class="select-dates">

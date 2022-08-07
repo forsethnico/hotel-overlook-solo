@@ -43,37 +43,37 @@
     const bookings = [
         {
             id:"5fwrgu4i7k55hl6to",
-            userId:101,
+            userID:101,
             date:"2022/02/22",
             roomNumber:1
         },
         {
             id:"5fwrgu4i7k55hl6tp",
-            userId:102,
+            userID:102,
             date:"2023/11/23",
             roomNumber:2
         },
         {
             id:"5fwrgu4i7k55hl6tq",
-            userId:103,
+            userID:103,
             date:"2022/02/03",
             roomNumber:3
         },
         {
             id:"5fwrgu4i7k55hl6tr",
-            userId:101,
+            userID:101,
             date:"2022/01/24",
             roomNumber:1
         },
         {
             id:"5fwrgu4i7k55hl6ts",
-            userId:102,
+            userID:102,
             date:"2022/01/24",
             roomNumber:2
         },
         {
             id:"5fwrgu4i7k55hl6tt",
-            userId:103,
+            userID:103,
             date:"2022/01/24",
             roomNumber:3
         },

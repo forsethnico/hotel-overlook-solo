@@ -6,7 +6,7 @@ class Customer {
 
   getBookings(bookings) {
     let userBookings = bookings.filter((booking) => {
-      return booking.userId === this.id;
+      return booking.userID === this.id;
     });
     return userBookings;
   }
