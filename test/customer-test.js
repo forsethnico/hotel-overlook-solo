@@ -1,22 +1,15 @@
 import chai from 'chai';
 const expect = chai.expect;
-import Booking from '../src/booking';
 import Customer from '../src/customer';
 import { customers, rooms, bookings } from './data-test.js'
 
 describe('Customer', () => {
     let customer1,
-    customer2, 
-    booking1,
-    booking2,
-    booking3;
+    customer2;
 
     beforeEach(() => {
         customer1 = new Customer(customers[0]);
         customer2 = new Customer(customers[1]);
-        booking1 = new Booking(bookings[0]);
-        booking2 = new Booking(bookings[1]);
-        booking3 = new Booking(bookings[2]);
     })
 
     it('should be a function', () => {
@@ -24,11 +17,11 @@ describe('Customer', () => {
     });
 
     it('should instantiate a new customer', () => {
-        expect(customer1).to.be.an.instanceOf(Customer);
+        expect(customer2).to.be.an.instanceOf(Customer);
     });
 
     it('should have a customer id', () => {
-        expect(customer1.id).to.equal(101);
+        expect(customer2.id).to.equal(102);
     });
 
     it('should have a customer name', () => {

@@ -51,12 +51,4 @@ describe('Room', () => {
         expect(room2.costPerNight).to.equal(477.38);
     });
 
-    it('should have a default value of being available to book', () => {
-        expect(room2.isAvailable).to.equal(true);
-    });
-
-    // it('show an image that corresponds to room type', () => {
-    //     expect(room1.image).to.equal(images[2]);
-    // });
-
 });
