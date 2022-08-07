@@ -16,7 +16,7 @@ import "./images/glacier.png";
 //Buttons//
 const loginBtn = document.querySelector(".login-button");
 const logoutBtn = document.querySelector(".logout-button");
-const bookNowBtn = document.querySelector(".book-now-btn");
+const bookNowBtn = document.querySelector(".book-now-button");
 const profileBtn = document.querySelector(".profile-button");
 const homeBtn = document.querySelector(".home-button");
 
@@ -29,11 +29,13 @@ const loginError = document.querySelector(".error-message");
 const userWelcome = document.getElementById("userWelcome");
 const mainPage = document.querySelector(".main-page");
 const profilePage = document.querySelector(".profile-page");
+const loginForm = document.querySelector('.login-form')
 
 //---Event Listeners---//
 window.addEventListener("load", getHotelData);
 //loginBtn.addEventListener('click', () => logIn(event))
 profileBtn.addEventListener("click", showUserProfile);
+logoutBtn.addEventListener('click', showMainPage);
 
 //---Global Variables---//
 let bookingData,
@@ -46,6 +48,7 @@ let bookingData,
   currentUser;
 
 //---Functions---//
+
 getHotelData().then((responses) => {
   bookingData = responses[0].bookings;
   roomData = responses[1].rooms;
@@ -69,31 +72,31 @@ function show(element) {
   element.classList.remove("hidden");
 }
 
-function checkEmptyFields(username, password) {
-  let emptyFields = false;
-  if (username === "") {
-    emptyFields = true;
-    usernameField.setAttribute("placeholder", "Username is required!");
-  }
-  if (password === "") {
-    emptyFields = true;
-    passwordField.setAttribute("placeholder", "Password is required!");
-  }
-  return emptyFields;
-}
+// function checkEmptyFields(username, password) {
+//   let emptyFields = false;
+//   if (username === "") {
+//     emptyFields = true;
+//     usernameField.setAttribute("placeholder", "Username is required!");
+//   }
+//   if (password === "") {
+//     emptyFields = true;
+//     passwordField.setAttribute("placeholder", "Password is required!");
+//   }
+//   return emptyFields;
+// }
 
-function logIn(event) {
-  event.preventDefault();
-  const username = usernameField.value;
-  const password = passwordField.value;
-  if (!checkEmptyFields(username, password)) {
-    try {
-      setUser(username, password);
-    } catch (error) {
-      loginError.innerText = error;
-    }
-  }
-}
+// function logIn(event) {
+//   event.preventDefault();
+//   const username = usernameField.value;
+//   const password = passwordField.value;
+//   if (!checkEmptyFields(username, password)) {
+//     try {
+//       setUser(username, password);
+//     } catch (error) {
+//       loginError.innerText = error;
+//     }
+//   }
+// }
 
 // function addNewBookingToPost(event) {
 //     event.preventDefault();
@@ -126,24 +129,24 @@ function logIn(event) {
 //     })
 // }
 
-function updateUserWelcome() {
+function displayUserWelcome() {
   userWelcome.innerText = `Hello, ${currentUser.name}`;
 }
 
 function displayTotalExpenses() {
   let expenses = currentUser.getTotalExpenses(bookings, rooms);
-  totalExpenses.innerHTML = "";
+  totalExpenses.innerHTML = '';
   totalExpenses.innerHTML = `$${expenses}`;
 }
 
 function displayUserBookings() {
   let userBookings = currentUser.getBookings(bookings);
-  stayResults.innerHTML = "";
+  stayResults.innerHTML = '';
   if (userBookings.length > 0) {
     userBookings.forEach((booking) => {
       stayResults.innerHTML += `<section class="user-booking">
           <p class ="booking-date">${booking.date}</p>
-          <p class ="booking-room-number">Room Number: ${booking.roomNumber}</p>
+          <p class ="booking-room-number">Room Number: ${booking.roomNumber}</p><br>
       </section>`;
     });
   } else {
@@ -156,24 +159,36 @@ function displayUserBookings() {
 function showUserProfile() {
   hide(mainPage);
   show(profilePage);
-  updateUserWelcome();
+  hide(loginForm)
+  show(logoutBtn);
+  show(bookNowBtn);
+  hide(profileBtn);
+  displayUserWelcome();
   displayTotalExpenses();
   displayUserBookings();
 }
 
-function setUser(username, password) {
-  passwordField.value = "";
-  usernameField.value = "";
-  checkPassword(password);
-  checkUsername(username);
-}
+// function setUser(username, password) {
+//   passwordField.value = "";
+//   usernameField.value = "";
+//   checkPassword(password);
+//   checkUsername(username);
+// }
 
-function checkPassword(password) {
-  if (password !== "overlook2021") {
-    throw new Error("Invalid password");
-  }
-}
+// function checkPassword(password) {
+//   if (password !== "overlook2021") {
+//     throw new Error("Invalid password");
+//   }
+// }
 
 // function checkUsername(username) {
 // if(username)
 // }
+
+function showMainPage() {
+  hide(logoutBtn);
+  hide(profilePage);
+  show(loginForm);
+  show(mainPage);
+  hide(bookNowBtn);
+}
