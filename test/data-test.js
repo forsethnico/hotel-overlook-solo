@@ -68,15 +68,15 @@
         {
             id:"5fwrgu4i7k55hl6ts",
             userId:102,
-            date:"2022/01/26",
+            date:"2022/01/24",
             roomNumber:2
         },
-        // {
-        //     id:"5fwrgu4i7k55hl6tt",
-        //     userId:103,
-        //     date:"2022/02/03",
-        //     roomNumber:3
-        // },
+        {
+            id:"5fwrgu4i7k55hl6tt",
+            userId:103,
+            date:"2022/01/24",
+            roomNumber:3
+        },
         // {
         //     id:"5fwrgu4i7k55hl6tu",
         //     userId:101,
