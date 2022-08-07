@@ -6,7 +6,7 @@ body {
 }
 
 header {
-  background: lightskyblue;
+  background: #327692;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,14 +27,22 @@ height: 100%;
 }
 
 .welcome-message {
-  color: rgb(159, 221, 235);
+  color: #47829B;
   font-size: 125px;
   font-family: 'Bebas Neue', cursive;
-  text-shadow: 2px 2px black;
+  text-shadow: 4px 4px #0E3C4E;
+  margin: 0px;
+  padding: 25px;
 }
 
-h2 {
-  
+.total-expenses, p, h2 {
+  color: #47829B;
+  font-family: 'Roboto Mono', monospace;
+  padding-left: 25px;
+}
+
+.profile-page {
+background-color: #04171D;
 }
 
 .hidden {
