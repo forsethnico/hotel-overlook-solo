@@ -26,11 +26,15 @@ width: 100%;
 height: 100%;
 }
 
-h2 {
+.welcome-message {
   color: rgb(159, 221, 235);
   font-size: 125px;
   font-family: 'Bebas Neue', cursive;
   text-shadow: 2px 2px black;
+}
+
+h2 {
+  
 }
 
 .hidden {

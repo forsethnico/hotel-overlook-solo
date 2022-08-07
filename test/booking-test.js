@@ -25,7 +25,7 @@ describe("Booking", () => {
   });
 
   it("should have a user id", () => {
-    expect(booking1.userId).to.equal(101);
+    expect(booking1.userID).to.equal(101);
   });
 
   it("should have a date", () => {
