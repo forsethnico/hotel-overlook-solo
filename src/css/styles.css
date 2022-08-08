@@ -49,6 +49,12 @@ height: 100%;
   padding-left: 25px;
 }
 
+.error-message {
+  color:#04171D;
+  font-family: 'Roboto Mono', monospace;
+  margin: 0px;
+}
+
 .profile-page {
 background-color: #04171D;
 }

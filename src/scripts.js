@@ -1,7 +1,7 @@
 //---Imports---//
 import "./css/styles.css";
 import apiCalls from "./apiCalls";
-import { getHotelData } from "./apiCalls";
+import { getHotelData , fetchCustomer } from "./apiCalls";
 import Customer from "./customer";
 import Booking from "./booking";
 import Hotel from "./hotel";
@@ -37,7 +37,7 @@ const datePicked = document.getElementById("arrivalDate");
 
 //---Event Listeners---//
 window.addEventListener("load", getHotelData);
-//loginBtn.addEventListener('click', () => logIn(event))
+loginBtn.addEventListener('click', logIn)
 profileBtn.addEventListener("click", showUserProfile);
 logoutBtn.addEventListener("click", showMainPage);
 bookNowBtn.addEventListener("click", showBookingPage);
@@ -48,10 +48,11 @@ let bookingData,
   roomData,
   rooms,
   bookings,
-  allCustomerData,
   customerIdData,
   hotel,
-  currentUser;
+  allCustomerData,
+  currentUser, 
+  id;
 
 //---Functions---//
 
@@ -59,9 +60,7 @@ getHotelData().then((responses) => {
   bookingData = responses[0].bookings;
   roomData = responses[1].rooms;
   allCustomerData = responses[2].customers;
-  customerIdData = responses[3];
   hotel = new Hotel();
-  currentUser = new Customer(customerIdData);
   rooms = roomData.map((roomInfo) => {
     return new Room(roomInfo);
   });
@@ -78,31 +77,52 @@ function show(element) {
   element.classList.remove("hidden");
 }
 
-// function checkEmptyFields(username, password) {
-//   let emptyFields = false;
-//   if (username === "") {
-//     emptyFields = true;
-//     usernameField.setAttribute("placeholder", "Username is required!");
-//   }
-//   if (password === "") {
-//     emptyFields = true;
-//     passwordField.setAttribute("placeholder", "Password is required!");
-//   }
-//   return emptyFields;
-// }
+function checkEmptyFields(username, password) {
+  let emptyFields = false;
+  if (username === "") {
+    emptyFields = true;
+    usernameField.setAttribute("placeholder", "Enter username");
+  }
+  if (password === "") {
+    emptyFields = true;
+    passwordField.setAttribute("placeholder", "Enter password");
+  }
+  return emptyFields;
+}
 
-// function logIn(event) {
-//   event.preventDefault();
-//   const username = usernameField.value;
-//   const password = passwordField.value;
-//   if (!checkEmptyFields(username, password)) {
-//     try {
-//       setUser(username, password);
-//     } catch (error) {
-//       loginError.innerText = error;
-//     }
-//   }
-// }
+function logIn(event) {
+  event.preventDefault();
+  const username = usernameField.value;
+  const password = passwordField.value;
+  if (!checkEmptyFields(username, password)) {
+    try {
+      setUser(username, password);
+    } catch (error) {
+      loginError.innerText = error.message;
+    }
+  }
+}
+
+function setUser(username, password) {
+  passwordField.value = '';
+  usernameField.value = '';
+  if(password !== 'overlook2021') {
+    throw new Error('Invalid user password.')
+  }
+  let id = username.slice(8);
+  if (id.startsWith(0)) {
+    throw new Error('Invalid user name.')
+  } else if (id) {
+    fetchCustomer(id).then((response) => {
+      currentUser = new Customer(response)
+      showUserProfile()
+    })
+    .catch((error) => {
+      loginError.innerText = error.message;
+    })
+  }
+}
+
 
 // function addNewBookingToPost(event) {
 //     event.preventDefault();
@@ -141,7 +161,7 @@ function displayUserWelcome() {
 
 function displayTotalExpenses() {
   let expenses = currentUser.getTotalExpenses(bookings, rooms);
-  totalExpenses.innerHTML = "";
+  totalExpenses.innerHTML = '';
   totalExpenses.innerHTML = `$${expenses}`;
 }
 
@@ -152,7 +172,9 @@ function displayUserBookings() {
     userBookings.forEach((booking) => {
       stayResults.innerHTML += `<section class="user-booking">
           <p class ="booking-date">${booking.date}</p>
-          <p class ="booking-room-number">Room Number: ${booking.roomNumber}</p><br>
+          <p class ="booking-room-number">Room Number: ${booking.roomNumber}</p>
+          <button class="delete-btn" id=${booking.id}>Cancel booking!</button>
+          <br>
       </section>`;
     });
   } else {
@@ -168,7 +190,17 @@ function showMainPage() {
   show(loginForm);
   show(mainPage);
   hide(bookNowBtn);
+  clearForm();
+  currentUser = null;
 }
+
+function clearForm() {
+  loginError.innerText = '';
+  passwordField.value = '';
+  usernameField.value = '';
+  usernameField.removeAttribute("placeholder");
+  passwordField.removeAttribute("placeholder");
+} 
 
 function showUserProfile() {
   hide(mainPage);
@@ -176,7 +208,6 @@ function showUserProfile() {
   hide(loginForm);
   show(logoutBtn);
   show(bookNowBtn);
-  hide(profileBtn);
   displayUserWelcome();
   displayTotalExpenses();
   displayUserBookings();
@@ -211,7 +242,7 @@ function checkAvailability() {
     });
   } else {
     availableRoomsSection.innerHTML = `<section class="room-details">
-  <p class ="no-booking">Sorry, no rooms availble! Try again with a different date or room type.</p>
+  <p class ="no-booking">Sorry, no rooms available! Try again with a different date or room type.</p>
   </section>`;
   }
 }
@@ -219,21 +250,3 @@ function checkAvailability() {
 function getDate(date) {
 return date.split('-').join('/');
 }
-
-
-// function setUser(username, password) {
-//   passwordField.value = "";
-//   usernameField.value = "";
-//   checkPassword(password);
-//   checkUsername(username);
-// }
-
-// function checkPassword(password) {
-//   if (password !== "overlook2021") {
-//     throw new Error("Invalid password");
-//   }
-// }
-
-// function checkUsername(username) {
-// if(username)
-// }
