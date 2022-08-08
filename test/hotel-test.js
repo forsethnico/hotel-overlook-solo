@@ -47,24 +47,24 @@ describe("Hotel", () => {
     ).to.deep.equal([]);
   });
 
-  it("should filter available rooms by room type", () => {
-    expect(
-      hotel.filterRoomType("2022/02/22", rooms, bookings, "suite")
-    ).to.deep.equal([
-      {
-        number: 2,
-        roomType: "suite",
-        bidet: false,
-        bedSize: "full",
-        numBeds: 2,
-        costPerNight: 477.38,
-      },
-    ]);
-  });
+//   it("should filter available rooms by room type", () => {
+//     expect(
+//       hotel.filterRoomType("2022/02/22", rooms, bookings, "suite")
+//     ).to.deep.equal([
+//       {
+//         number: 2,
+//         roomType: "suite",
+//         bidet: false,
+//         bedSize: "full",
+//         numBeds: 2,
+//         costPerNight: 477.38,
+//       },
+//     ]);
+//   });
 
-  it("should show no availabilty if room type is not available", () => {
-    expect(
-      hotel.filterRoomType("2022/02/22", rooms, bookings, "junior suite")
-    ).to.deep.equal([]);
-  });
+//   it("should show no availabilty if room type is not available", () => {
+//     expect(
+//       hotel.filterRoomType("2022/02/22", rooms, bookings, "junior suite")
+//     ).to.deep.equal([]);
+//   });
 });

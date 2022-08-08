@@ -15,7 +15,6 @@
   <header class="header-container">
     <h1 class="title">FossHotel Iceland</h1>
     <button class="home-button hidden" id="homeBtn">Go Home</button>
-    <button class="profile-button" id="profileBtn">Profile</button>
     <section class="login-form-section"> 
       <form class="login-form">
         <label for="username">Username:</label>
@@ -23,11 +22,11 @@
         <label for="pwd">Password:</label>
         <input type="password" id="pwd" name="pwd">
         <button class="login-button" id="loginBtn" type="submit" value="Sign in">Log In</button>
-        <p class="error-message" id="errorMessage"></p>
+        <p class="error-message hidden" id="errorMessage"></p>
       </form>
+      <button class="profile-button" id="profileBtn">Profile</button>
       <button class="book-now-button hidden" id="BookBtn">Book Now</button>
       <button git class="logout-button hidden" id="logoutBtn">Log Out</button>
-      <p class="error-message" id="errorMessage"></p>
     </section>
   </header>
   <section class="main-page">
@@ -40,12 +39,21 @@
     <h2>Your stays:</h2>
       <section class="stay-results"></section>
   </section>    
-  <section class="select-page hidden">
+  <section class="check-availability hidden">
     <form class="select-dates">
-      <label for="arrive">Choose Arrival Date</label>
-      <input type="date" id="arrivalDate" value="2021-01-01" min="2021-01-01" name="arrive" required>
+      <label for="arrive">Choose Arrival Date:</label>
+      <input type="date" id="arrivalDate" value="2022-08-10" min="2021-09-23" name="arrive" required>
+      <label for="room">Select Room Type:</label>
+      <select id="selectRoomType">
+        <option value="any">Any</option>
+        <option value="single-room">Single Room</option>
+        <option value="junior-suite">Junior Suite</option>
+        <option value="suite">Suite</option>
+        <option value="residential-suite">Residential Suite</option>
+      </select>
     </form>
-    <button class="sign-on-btn" id="checkAvailBtn">Check Availability</button>  
+    <button class="check-availability-btn" id="checkAvailBtn">Check Availability!</button>  
+    <section class="available-rooms"></section>
   </section>
   <section class="search-page hidden">
     <section class="room-type">
@@ -60,7 +68,7 @@
     <section class="user-message"></section>
     <section class="filtered-results"></section>
   </section> 
-  <section class-"booking-page hidden">
+  <section class="booking-page hidden">
     <p class="error-message"></p>
     <section class="room-to-book"></section>
     <button class="book-button hidden" id="bookBtn">Book</button>

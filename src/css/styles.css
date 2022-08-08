@@ -14,6 +14,15 @@ header {
   padding-left: 20px;
 }
 
+.login-form-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-form {
+  padding-bottom: 0px;
+}
+
 .main-page {
 background-image: url(../images/glacier.png);
 background-repeat: no-repeat;

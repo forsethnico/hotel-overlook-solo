@@ -18,7 +18,7 @@ const loginBtn = document.querySelector(".login-button");
 const logoutBtn = document.querySelector(".logout-button");
 const bookNowBtn = document.querySelector(".book-now-button");
 const profileBtn = document.querySelector(".profile-button");
-const homeBtn = document.querySelector(".home-button");
+const checkDateBtn = document.querySelector(".check-availability-btn");
 
 //---Sections---//
 const totalExpenses = document.querySelector(".total-expenses");
@@ -29,13 +29,17 @@ const loginError = document.querySelector(".error-message");
 const userWelcome = document.getElementById("userWelcome");
 const mainPage = document.querySelector(".main-page");
 const profilePage = document.querySelector(".profile-page");
-const loginForm = document.querySelector('.login-form')
+const loginForm = document.querySelector(".login-form");
+const checkAvailSection = document.querySelector(".check-availability");
+const availableRoomsSection = document.querySelector(".available-rooms");
 
 //---Event Listeners---//
 window.addEventListener("load", getHotelData);
 //loginBtn.addEventListener('click', () => logIn(event))
 profileBtn.addEventListener("click", showUserProfile);
-logoutBtn.addEventListener('click', showMainPage);
+logoutBtn.addEventListener("click", showMainPage);
+bookNowBtn.addEventListener("click", showBookingPage);
+checkAvailBtn.addEventListener("click", checkAvailability);
 
 //---Global Variables---//
 let bookingData,
@@ -135,13 +139,13 @@ function displayUserWelcome() {
 
 function displayTotalExpenses() {
   let expenses = currentUser.getTotalExpenses(bookings, rooms);
-  totalExpenses.innerHTML = '';
+  totalExpenses.innerHTML = "";
   totalExpenses.innerHTML = `$${expenses}`;
 }
 
 function displayUserBookings() {
   let userBookings = currentUser.getBookings(bookings);
-  stayResults.innerHTML = '';
+  stayResults.innerHTML = "";
   if (userBookings.length > 0) {
     userBookings.forEach((booking) => {
       stayResults.innerHTML += `<section class="user-booking">
@@ -156,16 +160,59 @@ function displayUserBookings() {
   }
 }
 
+function showMainPage() {
+  hide(logoutBtn);
+  hide(profilePage);
+  show(loginForm);
+  show(mainPage);
+  hide(bookNowBtn);
+}
+
 function showUserProfile() {
   hide(mainPage);
   show(profilePage);
-  hide(loginForm)
+  hide(loginForm);
   show(logoutBtn);
   show(bookNowBtn);
   hide(profileBtn);
   displayUserWelcome();
   displayTotalExpenses();
   displayUserBookings();
+}
+
+function showBookingPage() {
+  hide(mainPage);
+  hide(loginForm);
+  hide(profilePage);
+  show(profileBtn);
+  show(logoutBtn);
+  show(checkAvailSection);
+}
+
+function checkAvailability() {
+  let availableRooms = hotel.getAvailableRooms(date, rooms, bookings, roomType);
+  availableRoomsSection.innerHTML = "";
+  if (availableRooms.length > 0) {
+    availableRooms.forEach((room) => {
+      availableRoomsSection.innerHTML += `<section class="room-details">
+        <p class="room-detail">Room Number:${room.number}</p>
+        <p class="room-detail">Room Type: ${room.roomType}</p>
+        <p class="room-detail">Bed Size: ${room.bedSize}</p>
+        <p class="room-detail">Number of Beds: ${room.numBeds}</p>
+        <p class="room-detail">Has bidet: ${room.bidet}</p>
+        <p class="room-detail">Cost per Night: ${room.costPerNight}</p>
+        <br>
+    </section>`;
+    });
+  } else {
+    availableRoomsSection.innerHTML = `<section class="room-details">
+  <p class ="no-booking">Sorry, no rooms availble! Try again with a different date or room type.</p>
+  </section>`;
+  }
+}
+
+function getDate(date) {
+  
 }
 
 // function setUser(username, password) {
@@ -184,11 +231,3 @@ function showUserProfile() {
 // function checkUsername(username) {
 // if(username)
 // }
-
-function showMainPage() {
-  hide(logoutBtn);
-  hide(profilePage);
-  show(loginForm);
-  show(mainPage);
-  hide(bookNowBtn);
-}
