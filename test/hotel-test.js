@@ -49,7 +49,7 @@ describe("Hotel", () => {
 
   it("should filter available rooms by room type", () => {
     expect(
-      hotel.filterRoomType("2022/02/22", rooms, bookings, "suite")
+      hotel.getAvailableRooms("2022/02/22", rooms, bookings, "suite")
     ).to.deep.equal([
       {
         number: 2,
@@ -64,7 +64,7 @@ describe("Hotel", () => {
 
   it("should show no availabilty if room type is not available", () => {
     expect(
-      hotel.filterRoomType("2022/02/22", rooms, bookings, "junior suite")
+      hotel.getAvailableRooms("2022/02/22", rooms, bookings, "junior suite")
     ).to.deep.equal([]);
   });
 });
