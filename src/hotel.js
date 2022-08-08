@@ -13,14 +13,6 @@ class Hotel {
     }
     return availableRooms;
   }
-
-  // filterRoomType(date, rooms, bookings, roomType) {
-  //   let availableRooms = this.getAvailableRooms(date, rooms, bookings);
-  //   let roomTypeAvailable = availableRooms.filter((room) => {
-  //     return room.roomType === roomType;
-  //   });
-  //   return roomTypeAvailable;
-  // }
 }
 
 export default Hotel;
