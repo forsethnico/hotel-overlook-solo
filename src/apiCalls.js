@@ -1,13 +1,15 @@
-import {
-    loadUser
-} from './scripts';
 
 //Fetch Requests//
 
 const fetchCustomer = (id) => {
     return fetch(`http://localhost:3001/api/v1/customers/${id}`)
-    .then(response => response.json())
-    .catch(error => console.log(`API error: ${error.message}`))
+    .then(response => {
+        if(!response.ok) {
+            throw new Error('User not found. Try again with new credentials.')
+        } else {
+            return response.json()
+        }
+    })   
 }
 
 const fetchHotelData = (dataType) => {
@@ -17,12 +19,14 @@ const fetchHotelData = (dataType) => {
 }
 
 const getHotelData = () => {
-    const result = Promise.all([fetchHotelData('bookings'), fetchHotelData('rooms'), fetchHotelData('customers'), fetchCustomer(50)])
+    const result = Promise.all([fetchHotelData('bookings'), fetchHotelData('rooms'), fetchHotelData('customers')])
     .then(responses => {
         return responses;
     })
     return result;
 }
+
+
 
 //POST Request//
 
@@ -62,5 +66,6 @@ const getHotelData = () => {
 //    }
 
 export { 
-getHotelData
+getHotelData,
+fetchCustomer
  };
