@@ -166,7 +166,6 @@ function displayUserBookings() {
       stayResults.innerHTML += `<section class="user-booking">
           <p class ="booking-date">${booking.date}</p>
           <p class ="booking-room-number">Room Number: ${booking.roomNumber}</p>
-          <button class="delete-btn" id=${booking.id}>Cancel booking!</button>
           <br>
       </section>`;
     });
@@ -242,7 +241,6 @@ function checkAvailability() {
         <p class="room-detail">Room Type: ${room.roomType}</p>
         <p class="room-detail">Bed Size: ${room.bedSize}</p>
         <p class="room-detail">Number of Beds: ${room.numBeds}</p>
-        <p class="room-detail">Has bidet: ${room.bidet}</p>
         <p class="room-detail">Cost per Night: $${room.costPerNight}</p>
         <button class="book-me-btn" id=${room.number}>Book me!</button>
         <br>

@@ -20,7 +20,7 @@ describe("Hotel", () => {
 
   it("should provide available rooms for date", () => {
     expect(
-      hotel.getAvailableRooms("2022/02/22", rooms, bookings)
+      hotel.getAvailableRooms("2022/02/22", rooms, bookings, "any")
     ).to.deep.equal([
       {
         number: 2,
@@ -43,7 +43,7 @@ describe("Hotel", () => {
 
   it("should show no rooms if date has no vacancy", () => {
     expect(
-      hotel.getAvailableRooms("2022/01/24", rooms, bookings)
+      hotel.getAvailableRooms("2022/01/24", rooms, bookings, "any")
     ).to.deep.equal([]);
   });
 
@@ -62,7 +62,7 @@ describe("Hotel", () => {
     ]);
   });
 
-  it("should show no availabilty if room type is not available", () => {
+  it("should show no availabilty if room type is not available on that date", () => {
     expect(
       hotel.getAvailableRooms("2022/02/22", rooms, bookings, "junior suite")
     ).to.deep.equal([]);

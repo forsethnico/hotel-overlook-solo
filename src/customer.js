@@ -8,9 +8,9 @@ class Customer {
     let userBookings = bookings.filter((booking) => {
       return booking.userID === this.id;
     });
-    userBookings.sort((a,b) => {
-      return a.date - b.date
-    })
+    // userBookings.sort((a,b) => {
+    //   return parseInt((b.date.split("/").join("-")) - parseInt(a.date.split("/").join("-")))
+    // })
     return userBookings;
   }
 

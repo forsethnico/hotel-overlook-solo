@@ -6,9 +6,9 @@ class Hotel {
       });
       return roomBookings.length === 0;
     });
-    if (roomType && roomType !== 'any') {
+    if (roomType && roomType !== "any") {
       availableRooms = availableRooms.filter((room) => {
-      return room.roomType === roomType;
+        return room.roomType === roomType;
       });
     }
     return availableRooms;
