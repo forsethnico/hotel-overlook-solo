@@ -8,6 +8,9 @@ class Customer {
     let userBookings = bookings.filter((booking) => {
       return booking.userID === this.id;
     });
+    userBookings.sort((a,b) => {
+      return a.date - b.date
+    })
     return userBookings;
   }
 
@@ -19,6 +22,15 @@ class Customer {
       return totalExpense;
     }, 0);
     return totalCost;
+  }
+
+addBooking(date, roomNumber) {
+  let newBooking = {
+    "userID": this.id, 
+    "date": date,
+    "roomNumber": parseInt(roomNumber)
+  }
+  return newBooking
   }
 }
 
