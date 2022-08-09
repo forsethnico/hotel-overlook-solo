@@ -42,7 +42,7 @@
   <section class="check-availability hidden">
     <form class="select-dates">
       <label for="arrive">Choose Arrival Date:</label>
-      <input type="date" id="arrivalDate" value="2022-08-10" min="2021-09-23" name="arrive" required>
+      <input type="date" id="arrivalDate" value="2022-08-08" min="2021-09-23" name="arrive" required>
       <label for="room">Select Room Type:</label>
       <select id="selectRoomType">
         <option value="any">Any</option>
@@ -53,26 +53,9 @@
       </select>
     </form>
     <button class="check-availability-btn" id="checkAvailBtn">Check Availability!</button>  
+    <section class="success-message hidden"></section>
     <section class="available-rooms"></section>
   </section>
-  <section class="search-page hidden">
-    <section class="room-type">
-      <p class="your-dates"></p>
-      <button class="sign-on-button" id="changeDates">Change Dates</button>
-      <form class = "room-type-form" id="roomType">
-        <label for="roomType" class="room-type-form-label">Filter results by room type:</label>
-          <select name="roomType" class="room-type-form">
-          </select>
-      </form>
-    </section>
-    <section class="user-message"></section>
-    <section class="filtered-results"></section>
-  </section> 
-  <section class="booking-page hidden">
-    <p class="error-message"></p>
-    <section class="room-to-book"></section>
-    <button class="book-button hidden" id="bookBtn">Book</button>
-  </section> 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 </body>

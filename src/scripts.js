@@ -1,7 +1,6 @@
 //---Imports---//
 import "./css/styles.css";
-import apiCalls from "./apiCalls";
-import { getHotelData , fetchCustomer } from "./apiCalls";
+import { getHotelData, fetchCustomer } from "./apiCalls";
 import Customer from "./customer";
 import Booking from "./booking";
 import Hotel from "./hotel";
@@ -16,9 +15,9 @@ import "./images/glacier.png";
 //Buttons//
 const loginBtn = document.querySelector(".login-button");
 const logoutBtn = document.querySelector(".logout-button");
-const bookNowBtn = document.querySelector(".book-now-button");
+const bookingBtn = document.querySelector(".book-now-button");
 const profileBtn = document.querySelector(".profile-button");
-const checkDateBtn = document.querySelector(".check-availability-btn");
+const checkAvailBtn = document.querySelector(".check-availability-btn");
 
 //---Sections---//
 const totalExpenses = document.querySelector(".total-expenses");
@@ -34,28 +33,28 @@ const checkAvailSection = document.querySelector(".check-availability");
 const availableRoomsSection = document.querySelector(".available-rooms");
 const roomTypeChoice = document.getElementById("selectRoomType");
 const datePicked = document.getElementById("arrivalDate");
+const successMessage = document.querySelector(".success-message");
 
 //---Event Listeners---//
-window.addEventListener("load", getHotelData);
-loginBtn.addEventListener('click', logIn)
+window.addEventListener("load", getAllData);
+loginBtn.addEventListener("click", logIn);
 profileBtn.addEventListener("click", showUserProfile);
 logoutBtn.addEventListener("click", showMainPage);
-bookNowBtn.addEventListener("click", showBookingPage);
+bookingBtn.addEventListener("click", showBookingPage);
 checkAvailBtn.addEventListener("click", checkAvailability);
+availableRoomsSection.addEventListener("click", createNewBooking);
 
 //---Global Variables---//
 let bookingData,
   roomData,
   rooms,
   bookings,
-  customerIdData,
   hotel,
   allCustomerData,
-  currentUser, 
-  id;
+  currentUser;
 
 //---Functions---//
-
+function getAllData () {
 getHotelData().then((responses) => {
   bookingData = responses[0].bookings;
   roomData = responses[1].rooms;
@@ -67,7 +66,9 @@ getHotelData().then((responses) => {
   bookings = bookingData.map((bookingInfo) => {
     return new Booking(bookingInfo);
   });
+  setCurrentDate();
 });
+}
 
 function hide(element) {
   element.classList.add("hidden");
@@ -104,56 +105,48 @@ function logIn(event) {
 }
 
 function setUser(username, password) {
-  passwordField.value = '';
-  usernameField.value = '';
-  if(password !== 'overlook2021') {
-    throw new Error('Invalid user password.')
+  passwordField.value = "";
+  usernameField.value = "";
+  if (password !== "overlook2021") {
+    throw new Error("Invalid user password.");
   }
   let id = username.slice(8);
   if (id.startsWith(0)) {
-    throw new Error('Invalid user name.')
+    throw new Error("Invalid user name.");
   } else if (id) {
-    fetchCustomer(id).then((response) => {
-      currentUser = new Customer(response)
-      showUserProfile()
-    })
-    .catch((error) => {
-      loginError.innerText = error.message;
-    })
+    fetchCustomer(id)
+      .then((response) => {
+        currentUser = new Customer(response);
+        showUserProfile();
+      })
+      .catch((error) => {
+        loginError.innerText = error.message;
+      });
   }
 }
 
-
-// function addNewBookingToPost(event) {
-//     event.preventDefault();
-//     newBooking = {
-//     "userID": 48,
-//     "date": "2023/09/23",
-//     "roomNumber": 4
-//     }
-//     addNewBookingToPost(newBooking);
-// }
-
-// const addNewBooking = (newBooking) => {
-//     fetch('http://localhost:3001/api/v1/bookings', {
-//         method: "POST",
-//         headers: {'Content-Type': 'application/json'},
-//         body: JSON.stringify(newBooking)
-//     })
-//     .then(response => {
-//         if(!response.ok) {
-//             throw new Error(response.statusText);
-//         } else {
-//             return response.json();
-//         }
-//     })
-//     .then(booking => {
-//         //do stuff
-//     })
-//     .catch(err => {
-//         errorMessage.innerText = err.message;
-//     })
-// }
+const addNewBooking = (newBooking) => {
+    fetch('http://localhost:3001/api/v1/bookings', {
+        method: "POST",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newBooking)
+    })
+    .then(response => {
+        if(!response.ok) {
+            throw new Error(response.statusText);
+        } else {
+            return response.json();
+        }
+    })
+    .then(newBooking => {
+      displaySuccessMessage(newBooking.message);
+      getAllData();
+      setTimeout(showUserProfile, 5000);
+    })
+    .catch(err => {
+        errorMessage.innerText = err.message;
+    })
+}
 
 function displayUserWelcome() {
   userWelcome.innerText = `Hello, ${currentUser.name}`;
@@ -161,7 +154,7 @@ function displayUserWelcome() {
 
 function displayTotalExpenses() {
   let expenses = currentUser.getTotalExpenses(bookings, rooms);
-  totalExpenses.innerHTML = '';
+  totalExpenses.innerHTML = "";
   totalExpenses.innerHTML = `$${expenses}`;
 }
 
@@ -187,30 +180,35 @@ function displayUserBookings() {
 function showMainPage() {
   hide(logoutBtn);
   hide(profilePage);
+  hide(profileBtn);
   show(loginForm);
   show(mainPage);
-  hide(bookNowBtn);
+  hide(bookingBtn);
+  hide(checkAvailSection)
   clearForm();
   currentUser = null;
 }
 
 function clearForm() {
-  loginError.innerText = '';
-  passwordField.value = '';
-  usernameField.value = '';
-  usernameField.removeAttribute("placeholder");
-  passwordField.removeAttribute("placeholder");
-} 
+  loginError.innerText = "";
+  passwordField.value = "";
+  usernameField.value = "";
+  usernameField.setAttribute("placeholder", "");
+  passwordField.setAttribute("placeholder", "");
+}
 
 function showUserProfile() {
   hide(mainPage);
   show(profilePage);
+  hide(profileBtn);
   hide(loginForm);
   show(logoutBtn);
-  show(bookNowBtn);
+  show(bookingBtn);
+  hide(successMessage);
   displayUserWelcome();
   displayTotalExpenses();
   displayUserBookings();
+  hide(checkAvailSection);
 }
 
 function showBookingPage() {
@@ -219,14 +217,24 @@ function showBookingPage() {
   hide(profilePage);
   show(profileBtn);
   show(logoutBtn);
+  hide(bookingBtn);
   show(checkAvailSection);
+  hide(successMessage);
+  roomTypeChoice.value = "any";
+  availableRoomsSection.innerHTML = '';
+  setCurrentDate();
 }
 
 function checkAvailability() {
   let selectedDate = getDate(datePicked.value);
   let selectedRoomType = roomTypeChoice.value;
-  let availableRooms = hotel.getAvailableRooms(selectedDate, rooms, bookings, selectedRoomType);
-  availableRoomsSection.innerHTML = '';
+  let availableRooms = hotel.getAvailableRooms(
+    selectedDate,
+    rooms,
+    bookings,
+    selectedRoomType
+  );
+  availableRoomsSection.innerHTML = "";
   if (availableRooms.length > 0) {
     availableRooms.forEach((room) => {
       availableRoomsSection.innerHTML += `<section class="room-details">
@@ -245,8 +253,36 @@ function checkAvailability() {
   <p class ="no-booking">Sorry, no rooms available! Try again with a different date or room type.</p>
   </section>`;
   }
-}
+};
 
 function getDate(date) {
-return date.split('-').join('/');
+  return date.split("-").join("/");
+};
+
+function setCurrentDate() {
+  let currentDate = new Date().toJSON().slice(0, 10);
+  datePicked.value = currentDate;
+  datePicked.min = currentDate;
+};
+
+function createNewBooking(event) {
+  event.preventDefault();
+  if (event.target.classList.contains('book-me-btn')) {
+    let date = getDate(datePicked.value)
+    addNewBooking(currentUser.addBooking(date, event.target.id))
+  }
 }
+
+function deleteBookingBtn(event) {
+  event.preventDefault();
+  if(event.target.classList.contains('delete-btn')) {
+    deleteBooking(hotel.deleteBooking(event.target.id))
+  }
+}
+
+function displaySuccessMessage(message) {
+  successMessage.innerHTML = `<section class="new-booking">
+  <p>${message}</p>
+  </section>`
+  show(successMessage);
+};
