@@ -243,7 +243,6 @@ function checkAvailability() {
         <p class="room-detail">Number of Beds: ${room.numBeds}</p>
         <p class="room-detail">Cost per Night: $${room.costPerNight}</p>
         <button class="book-me-btn" id=${room.number}>Book me!</button>
-        <br>
     </section>`;
     });
   } else {

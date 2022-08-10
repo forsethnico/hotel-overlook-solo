@@ -41,11 +41,11 @@
   </section>    
   <section class="check-availability hidden">
     <form class="select-dates">
-      <div>
+      <div class="date-select">
         <label for="arrive">Choose Arrival Date:</label>
         <input type="date" id="arrivalDate" value="2022-08-08" min="2021-09-23" name="arrive" required>
       </div>
-      <div>
+      <div class="room-select">
         <label for="room">Select Room Type:</label>
         <select id="selectRoomType">
         <option value="any">Any</option>
@@ -56,8 +56,10 @@
         </select>
       </div>  
     </form>
-    <button class="check-availability-btn" id="checkAvailBtn">Check Availability!</button>  
-    <section class="success-message hidden"></section>
+    <div class="button-container">
+      <button class="check-availability-btn" id="checkAvailBtn">Check Availability!</button>
+      <section class="success-message hidden"></section> 
+    </div>  
     <section class="available-rooms"></section>
   </section>
   <script src="bundle.js"></script>
